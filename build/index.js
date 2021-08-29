@@ -1,17 +1,30 @@
-import React from 'react';
-import { render, Text } from 'ink';
-import { Select } from './components/Select';
+"use strict";
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ink = require("ink");
+
+var _Select = _interopRequireDefault(require("./components/Select"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 const App = () => {
-    const items = [
-        {
-            label: React.createElement(Text, { color: "white" }, "Refactor"),
-            value: 'refactor',
-        },
-        {
-            label: React.createElement(Text, { color: "white" }, "Fix"),
-            value: 'fix',
-        },
-    ];
-    return React.createElement(Select, { list: items, value: "refactor", onChange: () => { } });
+  const items = [{
+    label: /*#__PURE__*/_react.default.createElement(_ink.Text, {
+      color: "white"
+    }, "Refactor"),
+    value: 'refactor'
+  }, {
+    label: /*#__PURE__*/_react.default.createElement(_ink.Text, {
+      color: "white"
+    }, "Fix"),
+    value: 'fix'
+  }];
+  return /*#__PURE__*/_react.default.createElement(_Select.default, {
+    list: items,
+    value: "refactor",
+    onChange: () => {}
+  });
 };
-render(React.createElement(App, null));
+
+(0, _ink.render)( /*#__PURE__*/_react.default.createElement(App, null));

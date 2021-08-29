@@ -1,6 +1,5 @@
 import React from 'react'
-import { Box, Spacer, Text } from 'ink'
-import figures from 'figures'
+import { Box, Newline, Spacer, Text } from 'ink'
 
 export interface Item {
     label: React.ReactNode
@@ -13,13 +12,14 @@ export interface Props {
     onChange: (value: string) => void
 }
 
-export const Select: React.FC<Props> = (props: Props) => {
+const Select: React.FC<Props> = (props: Props) => {
     const { list, value, onChange } = props
+
     return (
-        <Box>
-            {list.map(item => (
-                <Box marginLeft={3} key={item.value}>
-                    <Text color="green">{value === item.value ? figures.pointer : ' '}</Text>
+        <Box flexDirection="column">
+            {list.map((item, key) => (
+                <Box marginLeft={3} key={key}>
+                    <Text color="green">{value === item.value ? '>' : ' '}</Text>
                     <Spacer />
                     {typeof item.label === 'string' ? <Text color="white">{item.value}</Text> : item.label}
                 </Box>
@@ -27,3 +27,5 @@ export const Select: React.FC<Props> = (props: Props) => {
         </Box>
     )
 }
+
+export default Select
