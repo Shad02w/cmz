@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "target": "ES6",
+        "jsx": "react",
+        "lib": ["ES2015", "ES2018", "ESNext"],
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "declaration": true,
+        "outDir": "build",
+        "sourceMap": false,
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "types": ["node"],
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}
