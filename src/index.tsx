@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, Text } from 'ink'
-import Select from './components/Select'
+import { Select } from './components/Select'
 import type { Item as SelectItem } from './components/Select'
 
 const App: React.FC = () => {

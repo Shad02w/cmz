@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.Select = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -29,5 +29,4 @@ const Select = props => {
   }, item.value) : item.label)));
 };
 
-var _default = Select;
-exports.default = _default;
+exports.Select = Select;

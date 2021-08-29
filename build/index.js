@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _ink = require("ink");
 
-var _Select = _interopRequireDefault(require("./components/Select"));
+var _Select = require("./components/Select");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,7 +20,7 @@ const App = () => {
     }, "Fix"),
     value: 'fix'
   }];
-  return /*#__PURE__*/_react.default.createElement(_Select.default, {
+  return /*#__PURE__*/_react.default.createElement(_Select.Select, {
     list: items,
     value: "refactor",
     onChange: () => {}

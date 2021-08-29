@@ -12,7 +12,7 @@ export interface Props {
     onChange: (value: string) => void
 }
 
-const Select: React.FC<Props> = (props: Props) => {
+export const Select: React.FC<Props> = (props: Props) => {
     const { list, value, onChange } = props
 
     return (
@@ -27,5 +27,3 @@ const Select: React.FC<Props> = (props: Props) => {
         </Box>
     )
 }
-
-export default Select
