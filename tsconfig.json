@@ -1,13 +1,13 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "target": "ES2018",
+        "target": "ES5",
+        "module": "CommonJS",
         "lib": ["ES2018"],
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "strict": true,
-        "emitDeclarationOnly": true,
         "declaration": true,
         "outDir": "build",
         "sourceMap": false,

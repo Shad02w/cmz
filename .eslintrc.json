@@ -1,12 +1,17 @@
 {
     "$schema": "https://json.schemastore.org/eslintrc",
     "parser": "@typescript-eslint/parser",
+    "env": {
+        "node": true
+    },
     "parserOptions": {
         "ecmaVersion": 2015,
         "sourceType": "module"
     },
     "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended"],
     "rules": {
-        "no-unused-vars": "warn"
+        "no-unused-vars": "off",
+        "react/prop-types": "off",
+        "react/display-name": "off"
     }
 }

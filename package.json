@@ -1,25 +1,20 @@
 {
     "name": "cmz",
     "version": "1.0.0",
-    "main": "index.js",
+    "bin": {
+        "cli": "cli.js"
+    },
     "repository": "https://github.com/Shad02w/cmz.git",
     "author": "Alvis Tse <alvistse123@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "ts-node-dev --respawn -P tsconfig.json src/index.tsx",
-        "build": "ts-node scripts/build.ts"
+        "build": "tsc",
+        "start": "ts-node-dev --respawn src/cli.tsx"
     },
     "engines": {
-        "node": ">=13"
+        "node": ">=12"
     },
     "devDependencies": {
-        "@babel/cli": "^7.14.8",
-        "@babel/core": "^7.15.0",
-        "@babel/plugin-transform-modules-commonjs": "^7.15.0",
-        "@babel/preset-env": "^7.15.0",
-        "@babel/preset-react": "^7.14.5",
-        "@babel/preset-typescript": "^7.15.0",
-        "@types/babel__core": "^7.1.15",
         "@types/node": "^16.7.5",
         "@types/react": "^17.0.19",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
@@ -28,13 +23,13 @@
         "eslint-plugin-react": "^7.25.0",
         "eslint-plugin-react-hooks": "^4.2.0",
         "prettier": "^2.3.2",
-        "ts-node": "^10.2.1",
         "ts-node-dev": "^1.1.8",
         "typescript": "^4.4.2"
     },
     "dependencies": {
-        "figures": "^4.0.0",
+        "figures": "3.2.0",
         "ink": "^3.0.9",
+        "ink-select-input": "^4.2.0",
         "react": "^17.0.2"
     }
 }

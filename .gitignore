@@ -1,4 +1,8 @@
 node_modules/
+
+build
+dist 
+
 build/
 dist/
 .idea
