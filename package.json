@@ -9,7 +9,8 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
-        "start": "ts-node-dev --respawn src/cli.tsx"
+        "start": "ts-node-dev --respawn src/cli.tsx",
+        "test": "ts-node-dev --respawn scripts/test.ts "
     },
     "engines": {
         "node": ">=12"

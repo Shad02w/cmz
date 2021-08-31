@@ -1,24 +1,39 @@
 import React from 'react'
 
 export interface StepItem {
-    content: React.ReactChild | null
+    question: React.ReactChild
+    content: React.ReactChild
 }
 
-export const useStep = (steps: StepItem[], onStepChange: (step: number, ended: boolean) => void) => {
+export const useStep = (steps: StepItem[], onFinish: () => void, onStepChange?: (step: number) => void) => {
     const [currentStep, setCurrentStep] = React.useState(0)
 
     const nextStep = React.useCallback(
         () =>
             setCurrentStep(step => {
-                if (step < steps.length) {
-                    const nextStep = step + 1
-                    onStepChange(nextStep, nextStep === steps.length - 1)
-                    return step + 1
+                if (step < steps.length - 1) {
+                    const newStep = step + 1
+                    onStepChange?.(newStep)
+                    return newStep
+                } else {
+                    onFinish()
+                    return step
                 }
-                return step
             }),
-        [steps, onStepChange]
+        [steps, onStepChange, onFinish]
     )
 
-    return { currentStep, nextStep }
+    const lastStep = React.useCallback(() => {
+        setCurrentStep(step => {
+            if (step === 0) {
+                return step
+            } else {
+                const newStep = step - 1
+                onStepChange?.(newStep)
+                return newStep
+            }
+        })
+    }, [onStepChange])
+
+    return { currentStep, nextStep, lastStep }
 }

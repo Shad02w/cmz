@@ -2,18 +2,14 @@ import React from 'react'
 import { Box, Text } from 'ink'
 import type { ItemProps } from 'ink-select-input'
 import type { Item } from 'ink-select-input/build/SelectInput'
-import type { Props as IndicatorProps } from 'ink-select-input/build/Indicator'
-import figures from 'figures'
-import { SelectListWithHint } from '../../components/SelectListWithHint'
+import { Question } from '../components/Question'
+import { SelectListIndicator } from '../components/SelectListIndictor'
+import { SelectListWithHint } from '../components/SelectListWithHint'
+import { StepsContext } from '../components/Steps'
 
 interface CommitType {
     name: string
     description?: string
-}
-
-interface Props {
-    commitTypes: CommitType[]
-    onSelect: (commitType: CommitType) => void
 }
 
 const Commits: CommitType[] = [
@@ -52,22 +48,21 @@ const itemComponent = React.memo((props: ItemProps) => {
     )
 })
 
-const indicatorComponent = React.memo((props: IndicatorProps) => {
-    return (
-        <Box marginRight={2}>
-            <Text color="magentaBright">{props.isSelected ? figures.pointer : ' '}</Text>
-        </Box>
-    )
-})
+export const CommitTypeSelector: React.FC = React.memo(() => {
+    const { nextStep } = React.useContext(StepsContext)
 
-export const CommitTypeSelector: React.FC = () => {
+    const handleSelect = () => {}
     return (
         <SelectListWithHint
             limit={5}
             items={items}
-            onSelect={() => console.log('hi')}
+            onSelect={nextStep}
             itemComponent={itemComponent}
-            indicatorComponent={indicatorComponent}
+            indicatorComponent={SelectListIndicator}
         />
     )
-}
+})
+
+export const CommitTypeQuestion: React.FC = React.memo(() => {
+    return <Question question="Select the type of change you want to commit" answer={null} />
+})
