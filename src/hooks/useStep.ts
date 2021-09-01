@@ -1,10 +1,5 @@
 import React from 'react'
 
-export interface StepItem {
-    question: React.ReactChild
-    content: React.ReactChild
-}
-
 export const useStep = (steps: StepItem[], onFinish: () => void, onStepChange?: (step: number) => void) => {
     const [currentStep, setCurrentStep] = React.useState(0)
 
