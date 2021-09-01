@@ -4,7 +4,7 @@ import figures from 'figures'
 
 interface Props {
     question: string
-    answer: React.ReactNode
+    answer: string | null
 }
 
 export const Question = (props: Props) => {
@@ -15,7 +15,7 @@ export const Question = (props: Props) => {
                 <Text bold>{figures.questionMarkPrefix}</Text>
                 {` ${question}: `}
             </Text>
-            {answer}
+            {answer && <Text>{answer}</Text>}
         </Box>
     )
 }

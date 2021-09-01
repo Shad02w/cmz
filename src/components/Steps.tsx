@@ -8,11 +8,10 @@ export interface StepItem {
 export interface Props<T> {
     steps: StepItem[]
     currentStep: number
-    initData: T
 }
 
 export const Steps = function <T>(props: Props<T>) {
-    const { currentStep, initData, steps } = props
+    const { currentStep, steps } = props
 
     return (
         <Box flexDirection="column">

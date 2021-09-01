@@ -1,4 +1,5 @@
 import { atom } from 'jotai'
+import { selectAtom } from 'jotai/utils'
 
 export interface StepState {
     currentStep: number
@@ -12,7 +13,7 @@ const initStepState: StepState = {
 
 export const stepStateAtom = atom(initStepState)
 
-export const currentStepAtom = atom(get => get(stepStateAtom).currentStep)
+export const currentStepAtom = selectAtom(stepStateAtom, _ => _.currentStep)
 
 export const nextStepAtom = atom(null, (get, set) => {
     const { currentStep, stepLength } = get(stepStateAtom)

@@ -1,9 +1,14 @@
 import React from 'react'
+import { Provider } from 'jotai'
 import { render } from 'ink'
-import { Steps } from './Steps'
+import { CommitStepForm } from './CommitStepForm'
 
 const App: React.FC = () => {
-    return <Steps />
+    return (
+        <Provider>
+            <CommitStepForm />
+        </Provider>
+    )
 }
 
 render(<App />)

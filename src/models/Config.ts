@@ -1,18 +1,17 @@
-interface Info {
+export interface NameWithOptionalDescription {
     name: string
     description?: string
 }
 
-type CommitType = Info
-
+export type CommitType = NameWithOptionalDescription
 interface ResolveParameter {
     commitType: CommitType
-    workspace: Info | null
+    workspace: NameWithOptionalDescription | null
     message: string
 }
 export interface Config {
-    commitTypes: Info[]
-    workspace?: Info[]
+    commitTypes: NameWithOptionalDescription[]
+    workspace?: NameWithOptionalDescription[]
     hasLongMessage?: boolean
     resolve: (result: ResolveParameter) => string
 }

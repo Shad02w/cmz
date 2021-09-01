@@ -19,7 +19,7 @@ export const SelectListWithHint = function <V>(props: Props<V>) {
     return (
         <Box flexDirection="column">
             <Text color="gray">
-                Use ({figures.arrowUp},{figures.arrowDown}) or (j,k) to navigate this list
+                Use ({figures.arrowUp},{figures.arrowDown}) or (j,k) to navigate this list, press Enter to confirm
             </Text>
             <SelectInput {...props} />
         </Box>
