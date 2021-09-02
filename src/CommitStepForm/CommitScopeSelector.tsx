@@ -6,11 +6,9 @@ import type { ItemProps } from 'ink-select-input/build'
 import type { Item } from 'ink-select-input/build/SelectInput'
 import { NullableSelectListWithHint } from '../components/NullableSelectListWithHint'
 import { useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { workspaceAtom } from '../atoms/commitFormAtom'
+import { commitScopeAtom } from '../atoms/commitFormAtom'
 import { nextStepAtom } from '../atoms/stepAtom'
 import { NameWithOptionalDescription } from '../models/Config'
-
-interface Props {}
 
 const items: Item<NameWithOptionalDescription>[] = [
     {
@@ -38,12 +36,12 @@ const itemComponent = React.memo((props: ItemProps) => {
     )
 })
 
-export const WorkspaceSelector = () => {
-    const setWorkspace = useUpdateAtom(workspaceAtom)
+export const CommitScopeSelector = () => {
+    const setScope = useUpdateAtom(commitScopeAtom)
     const nextStep = useUpdateAtom(nextStepAtom)
 
     const handleSelect = (item: Item<NameWithOptionalDescription> | null) => {
-        setWorkspace(item ? item.value : null)
+        setScope(item ? item.value : null)
         nextStep()
     }
     return (
@@ -58,7 +56,7 @@ export const WorkspaceSelector = () => {
     )
 }
 
-export const WorkspaceQuestion = () => {
-    const workspace = useAtomValue(workspaceAtom)
-    return <Question question="Select your workspace (Press Enter to skip)" answer={workspace?.name || null} />
+export const CommitScopeQuestion = () => {
+    const scope = useAtomValue(commitScopeAtom)
+    return <Question question="Select your scope" answer={scope?.name || null} />
 }

@@ -6,12 +6,12 @@ export interface NameWithOptionalDescription {
 export type CommitType = NameWithOptionalDescription
 interface ResolveParameter {
     commitType: CommitType
-    workspace: NameWithOptionalDescription | null
+    scope: NameWithOptionalDescription | null
     message: string
 }
 export interface Config {
     commitTypes: NameWithOptionalDescription[]
-    workspace?: NameWithOptionalDescription[]
+    scope?: NameWithOptionalDescription[]
     hasLongMessage?: boolean
     resolve: (result: ResolveParameter) => string
 }

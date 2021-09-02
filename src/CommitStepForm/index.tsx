@@ -3,13 +3,13 @@ import { useAtom } from 'jotai'
 import { Steps as UISteps } from '../components/Steps'
 import { stepStateAtom } from '../atoms/stepAtom'
 import { CommitTypeQuestion, CommitTypeSelector } from './CommitTypeSelector'
-import { WorkspaceQuestion, WorkspaceSelector } from './WorkspaceSelector'
+import { CommitScopeQuestion, CommitScopeSelector } from './CommitScopeSelector'
 import { MessageInput, MessageInputQuestion } from './MessageInput'
 import type { StepItem } from '../components/Steps'
 
 const steps: StepItem[] = [
     { question: <CommitTypeQuestion />, content: <CommitTypeSelector /> },
-    { question: <WorkspaceQuestion />, content: <WorkspaceSelector /> },
+    { question: <CommitScopeQuestion />, content: <CommitScopeSelector /> },
     { question: <MessageInputQuestion />, content: <MessageInput /> },
 ]
 

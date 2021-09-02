@@ -30,7 +30,6 @@
     },
     "dependencies": {
         "figures": "3.2.0",
-        "immer": "^9.0.6",
         "ink": "^3.0.9",
         "ink-select-input": "^4.2.0",
         "ink-text-input": "^4.0.1",

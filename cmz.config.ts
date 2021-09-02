@@ -19,7 +19,7 @@ export default defineConfig({
             description: 'Upgraded the dependencies of repo ',
         },
     ],
-    workspace: [
+    scope: [
         {
             name: 'web/game',
         },
@@ -36,5 +36,5 @@ export default defineConfig({
             name: 'all',
         },
     ],
-    resolve: ({ commitType, workspace, message }) => `[${commitType}]: ${workspace ? `${workspace}: ` : ''}${message}`,
+    resolve: ({ commitType, scope, message }) => `[${commitType}]: ${scope ? `${scope}: ` : ''}${message}`,
 })
