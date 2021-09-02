@@ -3,12 +3,12 @@ import { useAtomValue, useUpdateAtom } from 'jotai/utils'
 import { Box, Text } from 'ink'
 import type { ItemProps } from 'ink-select-input'
 import type { Item } from 'ink-select-input/build/SelectInput'
-import { Question } from '../components/Question'
-import { SelectListIndicator } from '../components/SelectListIndictor'
-import { SelectListWithHint } from '../components/SelectListWithHint'
-import { nextStepAtom } from '../atoms/stepAtom'
-import { commitTypeAtom } from '../atoms/commitFormAtom'
-import type { CommitType } from '../models/Config'
+import { Question } from '../../components/Question'
+import { SelectListIndicator } from '../../components/SelectListIndictor'
+import { SelectListWithHint } from '../../components/SelectListWithHint'
+import { nextStepAtom } from '../../atoms/stepAtom'
+import { commitTypeAtom } from '../../atoms/commitFormAtom'
+import type { CommitType } from '../../models/Config'
 
 const Commits: CommitType[] = [
     {

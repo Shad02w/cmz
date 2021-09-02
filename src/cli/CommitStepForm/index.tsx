@@ -1,11 +1,12 @@
 import React from 'react'
 import { useAtom } from 'jotai'
-import { Steps as UISteps } from '../components/Steps'
-import { stepStateAtom } from '../atoms/stepAtom'
+import { Steps as UISteps } from '../../components/Steps'
+import { stepStateAtom } from '../../atoms/stepAtom'
 import { CommitTypeQuestion, CommitTypeSelector } from './CommitTypeSelector'
 import { CommitScopeQuestion, CommitScopeSelector } from './CommitScopeSelector'
 import { MessageInput, MessageInputQuestion } from './MessageInput'
-import type { StepItem } from '../components/Steps'
+import type { StepItem } from '../../components/Steps'
+import { configAtom } from '../../atoms/configAtom'
 
 const steps: StepItem[] = [
     { question: <CommitTypeQuestion />, content: <CommitTypeSelector /> },
@@ -14,6 +15,7 @@ const steps: StepItem[] = [
 ]
 
 export const CommitStepForm = React.memo(() => {
+    const config = useAtom(configAtom)
     const [stepState, setStepState] = useAtom(stepStateAtom)
     React.useEffect(() => {
         // load config

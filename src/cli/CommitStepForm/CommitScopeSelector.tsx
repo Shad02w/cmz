@@ -1,14 +1,14 @@
 import React from 'react'
 import { Text } from 'ink'
-import { Question } from '../components/Question'
-import { SelectListIndicator } from '../components/SelectListIndictor'
+import { Question } from '../../components/Question'
+import { SelectListIndicator } from '../../components/SelectListIndictor'
 import type { ItemProps } from 'ink-select-input/build'
 import type { Item } from 'ink-select-input/build/SelectInput'
-import { NullableSelectListWithHint } from '../components/NullableSelectListWithHint'
+import { NullableSelectListWithHint } from '../../components/NullableSelectListWithHint'
 import { useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { commitScopeAtom } from '../atoms/commitFormAtom'
-import { nextStepAtom } from '../atoms/stepAtom'
-import { NameWithOptionalDescription } from '../models/Config'
+import { commitScopeAtom } from '../../atoms/commitFormAtom'
+import { nextStepAtom } from '../../atoms/stepAtom'
+import { NameWithOptionalDescription } from '../../models/Config'
 
 const items: Item<NameWithOptionalDescription>[] = [
     {
