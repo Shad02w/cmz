@@ -5,10 +5,13 @@ import { SelectListIndicator } from '../../components/SelectListIndictor'
 import type { ItemProps } from 'ink-select-input/build'
 import type { Item } from 'ink-select-input/build/SelectInput'
 import { NullableSelectListWithHint } from '../../components/NullableSelectListWithHint'
-import { useAtomValue, useUpdateAtom } from 'jotai/utils'
+import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
 import { commitScopeAtom } from '../../atoms/commitFormAtom'
 import { nextStepAtom } from '../../atoms/stepAtom'
 import { NameWithOptionalDescription } from '../../models/Config'
+import { configAtom } from '../../atoms/configAtom'
+
+const commitScopeConfigAtom = selectAtom(configAtom, config => config.scope)
 
 const items: Item<NameWithOptionalDescription>[] = [
     {

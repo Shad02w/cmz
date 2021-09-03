@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAtomValue, useUpdateAtom } from 'jotai/utils'
+import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
 import { Box, Text } from 'ink'
 import type { ItemProps } from 'ink-select-input'
 import type { Item } from 'ink-select-input/build/SelectInput'
@@ -8,28 +8,10 @@ import { SelectListIndicator } from '../../components/SelectListIndictor'
 import { SelectListWithHint } from '../../components/SelectListWithHint'
 import { nextStepAtom } from '../../atoms/stepAtom'
 import { commitTypeAtom } from '../../atoms/commitFormAtom'
+import { configAtom } from '../../atoms/configAtom'
 import type { CommitType } from '../../models/Config'
 
-const Commits: CommitType[] = [
-    {
-        name: 'Refactor',
-        description: 'A code change that neither fixes a bug nor adds a feature',
-    },
-    {
-        name: 'Fix',
-        description: 'A bug fix',
-    },
-    {
-        name: 'Upgrade',
-        description: 'Upgraded the dependencies of repo ',
-    },
-]
-
-const items: Item<CommitType>[] = Commits.map((commit, index) => ({
-    key: index.toString(),
-    label: commit.name,
-    value: commit,
-}))
+const commitTypesConfigAtom = selectAtom(configAtom, config => config.commitTypes)
 
 const CommitTypeOption = React.memo((props: { commitType: CommitType; highlighted: boolean }) => {
     const { commitType, highlighted } = props
@@ -45,20 +27,31 @@ const CommitTypeOption = React.memo((props: { commitType: CommitType; highlighte
     )
 })
 
-const itemComponent = React.memo((props: ItemProps) => {
-    const { label, isSelected } = props
-    const commit = items.find(_ => _.label === label)!
-    return (
-        <CommitTypeOption
-            commitType={{ name: label, description: commit?.value.description }}
-            highlighted={isSelected === true}
-        />
-    )
-})
-
 export const CommitTypeSelector: React.FC = React.memo(() => {
+    const commitTypes = useAtomValue(commitTypesConfigAtom)
     const updateCommitType = useUpdateAtom(commitTypeAtom)
     const nextStep = useUpdateAtom(nextStepAtom)
+
+    const items: Item<CommitType>[] = React.useMemo(
+        () =>
+            commitTypes.map((commit, index) => ({
+                key: index.toString(),
+                label: commit.name,
+                value: commit,
+            })),
+        [commitTypes]
+    )
+
+    const itemComponent = (props: ItemProps) => {
+        const { label, isSelected } = props
+        const commit = items.find(_ => _.label === label)!
+        return (
+            <CommitTypeOption
+                commitType={{ name: label, description: commit?.value.description }}
+                highlighted={isSelected === true}
+            />
+        )
+    }
 
     const handleSelect = (item: Item<CommitType>) => {
         updateCommitType(item.value)

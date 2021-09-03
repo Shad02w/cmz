@@ -16,10 +16,13 @@ const steps: StepItem[] = [
 
 export const CommitStepForm = React.memo(() => {
     const config = useAtom(configAtom)
+
     const [stepState, setStepState] = useAtom(stepStateAtom)
+
     React.useEffect(() => {
         // load config
         setStepState({ currentStep: 0, stepLength: steps.length })
     }, [setStepState])
+
     return <UISteps currentStep={stepState.currentStep} steps={steps} />
 })
