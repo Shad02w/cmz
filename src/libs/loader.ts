@@ -1,7 +1,13 @@
 import fs from 'fs/promises'
-import ts from 'typescript'
+import Module from 'module'
+import { createContext, Script } from 'vm'
 import path from 'path'
-// This is the loader for config file
+import ts from 'typescript'
+import type { Config } from './config'
+
+/**
+ * This is the loader for config file
+ */
 
 export const CONFIG_FILE_NAME = 'cmz.config'
 
@@ -40,18 +46,44 @@ async function transpileTsFile(filePath: string) {
     })
 }
 
-async function loadJSConfig(filePath: string) {
-    const config = require(filePath)
+async function verifyConfig() {
+    // verify config
 }
 
-async function loadTSConfig(filePath: string) {}
+async function loadJSConfig(filePath: string): Promise<Config> {
+    return require(filePath) as Config
+}
 
-export async function loadConfig(): Promise<string> {
+async function loadTSConfig(filePath: string): Promise<Config> {
+    const script = new Script(await transpileTsFile(filePath))
+    const req = Module.createRequire(filePath)
+    const mo = new Module(filePath)
+    const sandBox = {
+        exports: mo.exports,
+        module: mo,
+        require: req,
+        __filename: filePath,
+        __dirname: path.dirname(filePath),
+    }
+
+    const context = createContext(sandBox)
+    script.runInContext(context, { timeout: 1000 })
+    // TODO verify is needed
+    return mo.exports.default as Config
+}
+
+export async function loadConfig(): Promise<Config> {
     const filePath = await resolveConfigFilePath()
     if (!filePath) {
-        console.error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
-        process.exit(1)
+        throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
     } else {
-        return '123'
+        const fileType = getConfigFileType(filePath)
+        if (fileType === 'JS') {
+            return loadJSConfig(filePath)
+        } else if (fileType === 'TS') {
+            return loadTSConfig(filePath)
+        } else {
+            throw new Error('Config file should be json, js and ts file')
+        }
     }
 }

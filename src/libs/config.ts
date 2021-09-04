@@ -4,6 +4,7 @@ export interface NameWithOptionalDescription {
 }
 
 export type CommitType = NameWithOptionalDescription
+
 interface ResolveParameter {
     commitType: CommitType
     scope: NameWithOptionalDescription | null
