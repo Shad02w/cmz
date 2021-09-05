@@ -1,6 +1,5 @@
 import { Box, Text } from 'ink'
 import React from 'react'
-import { NameWithOptionalDescription } from '../../libs/config'
 
 interface Props {
     name: string
