@@ -5,19 +5,23 @@ import { Box, Newline } from 'ink'
 import { CommitStepForm } from './cli/CommitStepForm'
 import { Header } from './cli/Header'
 import { Loading } from './cli/Loading'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import { ErrorText } from './cli/ErrorText'
 
-const App: React.FC = () => {
+const CLI: React.FC = () => {
     return (
-        <Provider>
-            <Box flexDirection="column">
-                <Header />
-                <Newline />
-                <React.Suspense fallback={<Loading />}>
-                    <CommitStepForm />
-                </React.Suspense>
-            </Box>
-        </Provider>
+        <ErrorBoundary errorRender={ErrorText}>
+            <Provider>
+                <Box flexDirection="column">
+                    <Header />
+                    <Newline />
+                    <React.Suspense fallback={<Loading />}>
+                        <CommitStepForm />
+                    </React.Suspense>
+                </Box>
+            </Provider>
+        </ErrorBoundary>
     )
 }
 
-render(<App />)
+render(<CLI />)
