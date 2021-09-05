@@ -1,65 +1,30 @@
 import React from 'react'
 import { Text } from 'ink'
 import { Question } from '../../components/Question'
-import { SelectListIndicator } from '../../components/SelectListIndictor'
 import type { ItemProps } from 'ink-select-input/build'
-import type { Item } from 'ink-select-input/build/SelectInput'
-import { NullableSelectListWithHint } from '../../components/NullableSelectListWithHint'
 import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
 import { commitScopeAtom } from '../../atoms/commitFormAtom'
 import { nextStepAtom } from '../../atoms/stepAtom'
-import { NameWithOptionalDescription } from '../../models/Config'
+import { NameWithOptionalDescription } from '../../libs/config'
 import { configAtom } from '../../atoms/configAtom'
+import { CustomSelector } from '../../components/CustomSelector'
+import { NullableCustomSelector } from '../../components/CustomSelector/NullableCustomSelector'
 
 const commitScopeConfigAtom = selectAtom(configAtom, config => config.scope)
 
-const items: Item<NameWithOptionalDescription>[] = [
-    {
-        key: '1',
-        label: 'web/game',
-        value: {
-            name: 'web/game',
-        },
-    },
-    {
-        key: '2',
-        label: 'web/mobile',
-        value: {
-            name: 'web/mobile',
-        },
-    },
-]
-
-const itemComponent = React.memo((props: ItemProps) => {
-    const { isSelected, label } = props
-    return (
-        <Text bold color={isSelected ? 'magentaBright' : 'white'}>
-            {label}
-        </Text>
-    )
-})
-
-export const CommitScopeSelector = () => {
+export const CommitScopeSelector = React.memo(() => {
+    const commitScopes = useAtomValue(commitScopeConfigAtom)
     const setScope = useUpdateAtom(commitScopeAtom)
     const nextStep = useUpdateAtom(nextStepAtom)
 
-    const handleSelect = (item: Item<NameWithOptionalDescription> | null) => {
-        setScope(item ? item.value : null)
+    const handleSelect = (item: NameWithOptionalDescription | null) => {
+        setScope(item)
         nextStep()
     }
-    return (
-        <NullableSelectListWithHint
-            limit={5}
-            onSelect={handleSelect}
-            items={items}
-            itemComponent={itemComponent}
-            indicatorComponent={SelectListIndicator}
-            nullText="skip"
-        />
-    )
-}
+    return commitScopes ? <NullableCustomSelector list={commitScopes} onSelect={handleSelect} /> : null
+})
 
-export const CommitScopeQuestion = () => {
+export const CommitScopeQuestion = React.memo(() => {
     const scope = useAtomValue(commitScopeAtom)
     return <Question question="Select your scope" answer={scope?.name || null} />
-}
+})
