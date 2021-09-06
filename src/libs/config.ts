@@ -14,5 +14,5 @@ export interface Config {
     commitTypes: NameWithOptionalDescription[]
     scope?: NameWithOptionalDescription[]
     hasLongMessage?: boolean
-    resolve?: (result: ResolveParameter) => string
+    resolve: (result: ResolveParameter) => string
 }
