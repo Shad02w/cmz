@@ -1,8 +1,10 @@
 node_modules/
 
 build
-dist 
+dist
 
 build/
 dist/
 .idea
+
+.DS_Store
