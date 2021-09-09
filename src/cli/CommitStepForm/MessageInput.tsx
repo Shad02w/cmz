@@ -20,7 +20,7 @@ export const MessageInput = React.memo(() => {
 
     return (
         <Box flexDirection="row">
-            <Text color="green">{`(${draft.length}) `}</Text>
+            <Text color="green">{`(${draft.length.toString().padStart(2, '0')}) `}</Text>
             <TextInput value={draft} onChange={setDraft} onSubmit={handleSubmit} />
         </Box>
     )
