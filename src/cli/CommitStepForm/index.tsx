@@ -10,22 +10,24 @@ import { MessageInput, MessageInputQuestion } from './MessageInput'
 import { ResolvePreviewConfirm, ResolvePreviewQuestion } from './ResolvePreview'
 import type { StepItem } from '../../components/Steps'
 
-const steps: StepItem[] = [
-    { question: <CommitTypeQuestion />, content: <CommitTypeSelector /> },
-    { question: <CommitScopeQuestion />, content: <CommitScopeSelector /> },
-    { question: <MessageInputQuestion />, content: <MessageInput /> },
-    { question: <ResolvePreviewQuestion />, content: <ResolvePreviewConfirm /> },
-]
-
 export const CommitStepForm = React.memo(() => {
     const config = useAtomValue(configAtom)
 
+    const steps: StepItem[] = React.useMemo(
+        () => [
+            { question: <CommitTypeQuestion />, content: <CommitTypeSelector /> },
+            ...(config.scope ? [{ question: <CommitScopeQuestion />, content: <CommitScopeSelector /> }] : []),
+            { question: <MessageInputQuestion />, content: <MessageInput /> },
+            { question: <ResolvePreviewQuestion />, content: <ResolvePreviewConfirm /> },
+        ],
+        [config]
+    )
     const [stepState, setStepState] = useAtom(stepStateAtom)
 
     React.useEffect(() => {
         // load config
         setStepState({ currentStep: 0, stepLength: steps.length })
-    }, [setStepState])
+    }, [setStepState, steps])
 
     return <UISteps currentStep={stepState.currentStep} steps={steps} />
 })
