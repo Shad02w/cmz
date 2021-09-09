@@ -21,8 +21,6 @@ async function resolveConfigFilePath(): Promise<string | null> {
         .map(path => path.replace(/node_modules/i, ''))
         .flatMap(path => [path + CONFIG_FILE_NAME + '.ts', path + CONFIG_FILE_NAME + '.js'])
 
-    Promise.any
-
     for (const filePath of searchPaths) {
         try {
             await fs.access(filePath)
@@ -35,7 +33,7 @@ async function resolveConfigFilePath(): Promise<string | null> {
 }
 
 async function transpileTsFile(filePath: string) {
-    const buffer = await fs.readFile(path.resolve(process.cwd(), './cmz.config.ts'), { encoding: 'utf-8' })
+    const buffer = await fs.readFile(path.resolve(filePath), { encoding: 'utf-8' })
     return ts.transpile(buffer, {
         target: ts.ScriptTarget.ES2016,
         module: ts.ModuleKind.CommonJS,
@@ -51,6 +49,7 @@ async function verifyConfig() {
 }
 
 async function loadJSConfig(filePath: string): Promise<Config> {
+    // TODO verify is needed
     return require(filePath) as Config
 }
 
@@ -81,7 +80,8 @@ export async function loadConfig(): Promise<Config> {
         if (fileType === 'JS') {
             return loadJSConfig(filePath)
         } else if (fileType === 'TS') {
-            return loadTSConfig(filePath)
+            throw new Error('TS config file is not support')
+            // return loadTSConfig(filePath)
         } else {
             throw new Error('Config file should be json, js and ts file')
         }
