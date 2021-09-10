@@ -17,6 +17,18 @@ async function cleanDistFolder() {
     await fs.mkdir(distDirectoryPath)
 }
 
+async function transpileSourceCode() {
+    const result = spawnSync('babel', ['src', '--out-dir', 'dist', '--extensions .ts,.tsx'], {
+        shell: true,
+        stdio: 'inherit',
+    })
+
+    if (result.error) {
+        console.error(result.error)
+        process.exit(1)
+    }
+}
+
 async function copyProjectFiles() {
     const filePath = {
         rootPackageJson: path.resolve(__dirname, '../package.json'),
@@ -34,19 +46,8 @@ async function copyProjectFiles() {
 }
 
 async function run() {
-    // clean dist folder
     await cleanDistFolder()
-
-    const result = spawnSync('babel', ['src', '--out-dir', 'dist', '--extensions .ts,.tsx'], {
-        shell: true,
-        stdio: 'inherit',
-    })
-
-    if (result.error) {
-        console.error(result.error)
-        process.exit(1)
-    }
-
+    await transpileSourceCode()
     await copyProjectFiles()
 }
 
