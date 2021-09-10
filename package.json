@@ -1,6 +1,6 @@
 {
     "name": "@shad02w/cmz",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "bin": {
         "cmz": "bin.js"
     },
@@ -11,7 +11,7 @@
         "build": "ts-node scripts/build.ts",
         "start": "ts-node-dev --respawn src/bin.tsx",
         "test": "ts-node-dev --respawn scripts/test.ts ",
-        "commit": "node dist/bin.js"
+        "commit": "cmz"
     },
     "engines": {
         "node": ">=12"
@@ -22,6 +22,7 @@
         "@babel/preset-env": "^7.15.6",
         "@babel/preset-react": "^7.14.5",
         "@babel/preset-typescript": "^7.15.0",
+        "@shad02w/cmz": "^1.0.1",
         "@types/node": "^16.7.5",
         "@types/react": "^17.0.19",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
