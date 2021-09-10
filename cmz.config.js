@@ -12,6 +12,10 @@ module.exports = {
             name: 'Upgrade',
             description: 'Dependencies update and change',
         },
+        {
+            name: 'Publish',
+            description: 'Release a new version to npm',
+        },
     ],
     resolve: ({ commitType, message }) => `(${commitType.name}) ${message}`,
 }
