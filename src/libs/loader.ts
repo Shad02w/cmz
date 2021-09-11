@@ -17,10 +17,7 @@ function getConfigFileType(filePath: string): 'TS' | 'JS' | null {
 }
 
 async function resolveConfigFilePath(): Promise<string | null> {
-    const searchPaths = module.paths
-        .map(path => path.replace(/node_modules/i, ''))
-        .flatMap(path => [path + CONFIG_FILE_NAME + '.ts', path + CONFIG_FILE_NAME + '.js'])
-
+    const searchPaths = [path.resolve(process.cwd(), `${CONFIG_FILE_NAME}.js`)]
     for (const filePath of searchPaths) {
         try {
             await fs.access(filePath)
@@ -44,12 +41,7 @@ async function transpileTsFile(filePath: string) {
     })
 }
 
-async function verifyConfig() {
-    // verify config
-}
-
 async function loadJSConfig(filePath: string): Promise<Config> {
-    // TODO verify is needed
     return require(filePath) as Config
 }
 
@@ -67,7 +59,6 @@ async function loadTSConfig(filePath: string): Promise<Config> {
 
     const context = createContext(sandBox)
     script.runInContext(context, { timeout: 1000 })
-    // TODO verify is needed
     return mo.exports.default as Config
 }
 
@@ -80,8 +71,7 @@ export async function loadConfig(): Promise<Config> {
         if (fileType === 'JS') {
             return loadJSConfig(filePath)
         } else if (fileType === 'TS') {
-            throw new Error('TS config file is not support')
-            // return loadTSConfig(filePath)
+            throw new Error('Config file in typescript currently is not supported')
         } else {
             throw new Error('Config file should be json, js and ts file')
         }
