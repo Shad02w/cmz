@@ -1,6 +1,6 @@
 {
     "name": "@shad02w/cmz",
-    "version": "1.0.2-beta.1",
+    "version": "1.0.2-beta.2",
     "bin": {
         "cmz": "bin.js"
     },
@@ -8,9 +8,8 @@
     "author": "Alvis Tse <alvistse123@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "build": "ts-node scripts/build.ts",
         "start": "ts-node-dev --respawn src/bin.tsx",
-        "test": "ts-node-dev --respawn scripts/test.ts ",
+        "build": "ts-node scripts/build.ts",
         "commit": "cmz"
     },
     "engines": {
