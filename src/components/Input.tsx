@@ -5,7 +5,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import type { FC } from 'react'
 import { Text, useInput } from 'ink'
-import chalk = require('chalk')
+import chalk from 'chalk'
 import type { Except } from 'type-fest'
 
 interface Props {
