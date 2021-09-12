@@ -1,9 +1,14 @@
 import fs from 'fs/promises'
 import Module from 'module'
 import { createContext, Script } from 'vm'
+import { resolveConfigFilePath } from '../utils/LoaderUtil'
 import path from 'path'
 import ts from 'typescript'
 import type { Config } from './config'
+
+const LoaderUtil = {
+    resolveConfigFilePath,
+}
 
 /**
  * This is the loader for config file
@@ -14,19 +19,6 @@ export const CONFIG_FILE_NAME = 'cmz.config'
 function getConfigFileType(filePath: string): 'TS' | 'JS' | null {
     const ext = path.extname(filePath)
     return ext === '.ts' ? 'TS' : ext === '.js' ? 'JS' : null
-}
-
-async function resolveConfigFilePath(): Promise<string | null> {
-    const searchPaths = [path.resolve(process.cwd(), `${CONFIG_FILE_NAME}.js`)]
-    for (const filePath of searchPaths) {
-        try {
-            await fs.access(filePath)
-            return filePath
-        } catch (e) {
-            // just do nothing, let run to the end of the file
-        }
-    }
-    return null
 }
 
 async function transpileTsFile(filePath: string) {
@@ -63,7 +55,7 @@ async function loadTSConfig(filePath: string): Promise<Config> {
 }
 
 export async function loadConfig(): Promise<Config> {
-    const filePath = await resolveConfigFilePath()
+    const filePath = await LoaderUtil.resolveConfigFilePath()
     if (!filePath) {
         throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
     } else {
