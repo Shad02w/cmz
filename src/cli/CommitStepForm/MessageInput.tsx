@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Text } from 'ink'
 import { Question } from '../../components/Question'
-import TextInput from 'ink-text-input'
+import { Input } from '../../components/Input'
 import { commitMessageAtom } from '../../atoms/commitFormAtom'
 import { useAtom } from 'jotai'
 import { useAtomValue, useUpdateAtom } from 'jotai/utils'
@@ -21,7 +21,12 @@ export const MessageInput = React.memo(() => {
     return (
         <Box flexDirection="row">
             <Text color="green">{`(${draft.length.toString().padStart(2, '0')}) `}</Text>
-            <TextInput value={draft} onChange={setDraft} onSubmit={handleSubmit} />
+            <Input
+                value={draft}
+                onChange={setDraft}
+                onSubmit={handleSubmit}
+                placeholder="Enter your commit message here"
+            />
         </Box>
     )
 })

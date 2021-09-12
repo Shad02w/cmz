@@ -21,7 +21,7 @@ export const nextStepAtom = atom(null, (get, set) => {
 
 export const lastStepAtom = atom(null, (get, set) => {
     const { currentStep, stepLength } = get(stepStateAtom)
-    if (currentStep == 0) {
-        set(stepStateAtom, { stepLength, currentStep: currentStep + 1 })
+    if (currentStep !== 0) {
+        set(stepStateAtom, { stepLength, currentStep: currentStep - 1 })
     }
 })
