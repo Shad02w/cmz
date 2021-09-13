@@ -1,13 +1,13 @@
 import fs from 'fs/promises'
 import Module from 'module'
 import { createContext, Script } from 'vm'
-import { resolveConfigFilePath } from '../utils/LoaderUtil'
+import { resolveFilePathInWorkspace } from '../utils/LoaderUtil'
 import path from 'path'
 import ts from 'typescript'
 import type { Config } from './config'
 
 const LoaderUtil = {
-    resolveConfigFilePath,
+    resolveConfigFilePath: resolveFilePathInWorkspace,
 }
 
 /**
@@ -55,7 +55,7 @@ async function loadTSConfig(filePath: string): Promise<Config> {
 }
 
 export async function loadConfig(): Promise<Config> {
-    const filePath = await LoaderUtil.resolveConfigFilePath()
+    const filePath = await LoaderUtil.resolveConfigFilePath(`${CONFIG_FILE_NAME}.js`)
     if (!filePath) {
         throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
     } else {

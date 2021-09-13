@@ -1,26 +1,25 @@
 import path from 'path'
 import fs from 'fs/promises'
 
-const CONFIG_FILE_NAME = 'cmz.config'
+/**
+ * This will resolve the nearest files in workspace folder tree
+ */
+export async function resolveFilePathInWorkspace(fileName: string): Promise<string | null> {
+    const parsed = path.parse(process.cwd())
+    const pathClips = [...parsed.dir.replace(parsed.root, '').split(path.sep), parsed.base]
 
-export async function resolveConfigFilePath(): Promise<string | null> {
-    const pathsClip = process.cwd().split(path.sep)
-
-    const searchPaths = pathsClip
+    const searchPaths = pathClips
         .map((_, index) => {
-            const clips = pathsClip.slice(0, pathsClip.length - index)
-            if (clips.length === 1) {
-                return clips[0]
-            } else {
-                return path.join(...clips)
-            }
+            const clips = pathClips.slice(0, pathClips.length - index)
+            return path.join(parsed.root, ...clips)
         })
-        .map(resolvedDirectory => path.join(resolvedDirectory, `${CONFIG_FILE_NAME}.js`))
+        .map(resolvedDirectory => path.join(resolvedDirectory, fileName))
+        .filter(_ => path.isAbsolute(_))
 
     return await checkFileOrDirectoryExistence(searchPaths)
 }
 
-async function checkFileOrDirectoryExistence(paths: string[]): Promise<string | null> {
+export async function checkFileOrDirectoryExistence(paths: string[]): Promise<string | null> {
     for (const path of paths) {
         try {
             await fs.access(path)
