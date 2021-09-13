@@ -68,3 +68,13 @@ module.exports = defineConfig({
 
 ```
 
+You can also define configuration file in Typescirpt with `cmz.config.ts` file
+
+```javascript
+import { defineConfig } from '@shad02w/cmz'
+
+export default defineConfig({
+    // Your config here
+})
+```
+
