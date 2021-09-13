@@ -1,6 +1,6 @@
 {
     "name": "@shad02w/cmz",
-    "version": "1.0.2-beta.3",
+    "version": "1.0.2",
     "bin": {
         "cmz": "bin.js"
     },
