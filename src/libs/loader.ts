@@ -26,15 +26,16 @@ async function loadJSConfig(filePath: string): Promise<Config> {
 }
 
 async function loadTSConfig(filePath: string): Promise<Config> {
-    try {
-        require.resolve('ts-node')
-    } catch (error) {
-        throw new Error('Module `ts-node` is needed to load config in typescript')
-    }
-    const script = new Script(await LoaderUtil.requireTSFile(filePath))
     const req = Module.createRequire(filePath)
     const mo = new Module(filePath)
 
+    try {
+        req.resolve('ts-node')
+    } catch (error) {
+        throw new Error('Module `ts-node` is needed to load config in typescript')
+    }
+
+    const script = new Script(await LoaderUtil.requireTSFile(filePath))
     const sandBox = {
         exports: mo.exports,
         module: mo,
