@@ -10,7 +10,7 @@ import { configAtom } from '../../atoms/configAtom'
 import { CustomSelector } from '../../components/CustomSelector'
 import { NullableCustomSelector } from '../../components/CustomSelector/NullableCustomSelector'
 
-const commitScopeConfigAtom = selectAtom(configAtom, config => config.scope)
+const commitScopeConfigAtom = selectAtom(configAtom, config => config.scopes)
 
 export const CommitScopeSelector = React.memo(() => {
     const commitScopes = useAtomValue(commitScopeConfigAtom)

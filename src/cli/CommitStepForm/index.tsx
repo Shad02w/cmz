@@ -25,7 +25,7 @@ export const CommitStepForm = React.memo(() => {
     const steps: StepItem[] = React.useMemo(
         () => [
             { question: <CommitTypeQuestion />, content: <CommitTypeSelector /> },
-            ...(config.scope ? [{ question: <CommitScopeQuestion />, content: <CommitScopeSelector /> }] : []),
+            ...(config.scopes ? [{ question: <CommitScopeQuestion />, content: <CommitScopeSelector /> }] : []),
             { question: <MessageInputQuestion />, content: <MessageInput /> },
             { question: <ResolvePreviewQuestion />, content: <ResolvePreviewConfirm /> },
         ],
