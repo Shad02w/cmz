@@ -1,4 +1,6 @@
-module.exports = {
+const { defineConfig } = require('@shad02w/cmz')
+
+module.exports = defineConfig({
     commitTypes: [
         {
             name: 'Refactor',
@@ -18,4 +20,4 @@ module.exports = {
         },
     ],
     resolve: ({ commitType, message }) => `(${commitType.name}) ${message}`,
-}
+})

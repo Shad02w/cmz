@@ -21,7 +21,7 @@
         "@babel/preset-env": "^7.15.6",
         "@babel/preset-react": "^7.14.5",
         "@babel/preset-typescript": "^7.15.0",
-        "@shad02w/cmz": "^1.0.1",
+        "@shad02w/cmz": "^1.0.2-beta.3",
         "@types/node": "^16.7.5",
         "@types/react": "^17.0.19",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
