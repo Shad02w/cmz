@@ -1,6 +1,6 @@
-const { defineConfig } = require('@shad02w/cmz')
+import { defineConfig } from '@shad02w/cmz'
 
-module.exports = defineConfig({
+export default defineConfig({
     commitTypes: [
         {
             name: 'Refactor',
