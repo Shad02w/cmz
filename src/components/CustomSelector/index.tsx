@@ -33,7 +33,7 @@ export const CustomSelector: React.FC<Props> = React.memo((props: Props) => {
 
     return (
         <SelectListWithHint
-            limit={10}
+            limit={5}
             items={items}
             onSelect={handleSelect}
             itemComponent={itemComponent}

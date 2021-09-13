@@ -1419,16 +1419,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@shad02w/cmz@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@shad02w/cmz/-/cmz-1.0.3.tgz#e05212c115a353dd16401e7c23122d8a366fc8f7"
-  integrity sha512-2pNvuku5zkZrrlQhH6Y9mpoWwZpTd646YRjxWtwXA1wExihu8gb5qtjEk4sCBzl88kpvWwdqUAGeaLR2O1Ir4Q==
+"@shad02w/cmz@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@shad02w/cmz/-/cmz-1.0.4.tgz#794dc66d2e446ea0dfc0572939a18310f7e02598"
+  integrity sha512-6IsYxL5HNoPY0c6UWHzTUZHKNP/WazsL0F6HDNho2NWbN6Nnyeol78Jjg0tqwywpncOoKKyJjsYW7etN+Q91YQ==
   dependencies:
     figures "3.2.0"
     ink "^3.0.9"
     ink-select-input "^4.2.0"
     ink-spinner "^4.0.2"
-    jotai "^1.3.2"
+    jotai "^1.3.3"
     react "^17.0.2"
 
 "@sinonjs/commons@^1.7.0":
@@ -3924,11 +3924,6 @@ jest@^27.1.1:
     "@jest/core" "^27.1.1"
     import-local "^3.0.2"
     jest-cli "^27.1.1"
-
-jotai@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.3.2.tgz#955cdeaa35b0b792ac452c90646b52362d998f98"
-  integrity sha512-if3G/ic6PhGFPc0ypVi4F6gcfkfLN76iN4K0hayK+O+7Z0IUEQOow2w8NCDeZ2ES9DHmGpNh2pkbSxxU3kv2NQ==
 
 jotai@^1.3.3:
   version "1.3.3"
