@@ -68,7 +68,7 @@ module.exports = defineConfig({
 
 ```
 
-You can also define configuration file in Typescirpt with `cmz.config.ts` file
+You can also define configuration file in Typescirpt , to do that , create a `cmz.config.ts` file and set it up similar to above
 
 ```javascript
 import { defineConfig } from '@shad02w/cmz'
@@ -78,3 +78,4 @@ export default defineConfig({
 })
 ```
 
+and also install `ts-node`, without `ts-node` the config file will not able to transpile.
