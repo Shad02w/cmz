@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { spawnSync } from 'child_process'
+import figures from 'figures'
 
 const filePaths = {
     rootPackageJson: path.resolve(__dirname, '../package.json'),
@@ -10,7 +11,9 @@ const filePaths = {
     tsconfig: path.resolve(__dirname, '../tsconfig.json'),
 }
 
-function runCommand(command: string, args: string[] = []) {
+function runCommand(description: string, command: string, args: string[] = []) {
+    console.log('\x1b[32m%s\x1b[0m%s', figures.tick, ` ${description}`)
+
     const result = spawnSync(command, args, {
         shell: true,
         stdio: 'inherit',
@@ -20,6 +23,8 @@ function runCommand(command: string, args: string[] = []) {
         console.error(result.error)
         process.exit(1)
     }
+
+    console.log('\n')
 }
 
 async function cleanDistFolder() {
@@ -38,11 +43,11 @@ async function cleanDistFolder() {
 }
 
 async function generateDeclarationFiles() {
-    runCommand('tsc', ['-P', filePaths.tsconfig])
+    runCommand('Generate Declaration File', 'tsc', ['-P', filePaths.tsconfig])
 }
 
 async function transpileSourceCode() {
-    runCommand('babel', ['src', '--out-dir', 'dist', '--extensions .ts,.tsx'])
+    runCommand('Transpile Source Code', 'babel', ['src', '--out-dir', 'dist', '--extensions .ts,.tsx'])
 }
 
 async function copyProjectFiles() {
