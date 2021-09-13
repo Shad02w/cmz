@@ -21,7 +21,7 @@ export const CommitScopeSelector = React.memo(() => {
         setScope(item)
         nextStep()
     }
-    return commitScopes ? <NullableCustomSelector list={commitScopes} onSelect={handleSelect} /> : null
+    return commitScopes ? <NullableCustomSelector list={commitScopes} onSelect={handleSelect} nullLabel="skip" /> : null
 })
 
 export const CommitScopeQuestion = React.memo(() => {
