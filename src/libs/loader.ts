@@ -1,13 +1,14 @@
 import fs from 'fs/promises'
 import Module from 'module'
 import { createContext, Script } from 'vm'
-import { getNearestFilePath } from '../utils/LoaderUtil'
+import { getNearestFilePath, requireTSFile, requireJSFile } from '../utils/LoaderUtil'
 import path from 'path'
-import ts from 'typescript'
 import type { Config } from './config'
 
 const LoaderUtil = {
-    resolveConfigFilePath: getNearestFilePath,
+    getNearestFilePath,
+    requireTSFile,
+    requireJSFile,
 }
 
 /**
@@ -20,27 +21,20 @@ function getConfigFileType(filePath: string): 'TS' | 'JS' | null {
     const ext = path.extname(filePath)
     return ext === '.ts' ? 'TS' : ext === '.js' ? 'JS' : null
 }
-
-async function transpileTsFile(filePath: string) {
-    const buffer = await fs.readFile(path.resolve(filePath), { encoding: 'utf-8' })
-    return ts.transpile(buffer, {
-        target: ts.ScriptTarget.ES2016,
-        module: ts.ModuleKind.CommonJS,
-        noEmit: true,
-        esModuleInterop: true,
-        strict: true,
-        moduleResolution: ts.ModuleResolutionKind.NodeJs,
-    })
-}
-
 async function loadJSConfig(filePath: string): Promise<Config> {
-    return require(filePath) as Config
+    return (await LoaderUtil.requireJSFile(filePath)) as Config
 }
 
 async function loadTSConfig(filePath: string): Promise<Config> {
-    const script = new Script(await transpileTsFile(filePath))
+    try {
+        require.resolve('ts-node')
+    } catch (error) {
+        throw new Error('Module `ts-node` is needed to load config in typescript')
+    }
+    const script = new Script(await LoaderUtil.requireTSFile(filePath))
     const req = Module.createRequire(filePath)
     const mo = new Module(filePath)
+
     const sandBox = {
         exports: mo.exports,
         module: mo,
@@ -55,7 +49,11 @@ async function loadTSConfig(filePath: string): Promise<Config> {
 }
 
 export async function loadConfig(): Promise<Config> {
-    const filePath = await LoaderUtil.resolveConfigFilePath(process.cwd(), `${CONFIG_FILE_NAME}.js`)
+    const filePath = await LoaderUtil.getNearestFilePath(process.cwd(), [
+        `${CONFIG_FILE_NAME}.ts`,
+        `${CONFIG_FILE_NAME}.js`,
+    ])
+
     if (!filePath) {
         throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
     } else {
@@ -63,7 +61,7 @@ export async function loadConfig(): Promise<Config> {
         if (fileType === 'JS') {
             return loadJSConfig(filePath)
         } else if (fileType === 'TS') {
-            throw new Error('Config file in typescript currently is not supported')
+            return loadTSConfig(filePath)
         } else {
             throw new Error('Config file should be json, js and ts file')
         }
