@@ -11,6 +11,10 @@ export default defineConfig({
             description: 'A bug fix',
         },
         {
+            name: 'Feature',
+            description: 'Newly added functionalities',
+        },
+        {
             name: 'Upgrade',
             description: 'Dependencies update and change',
         },
