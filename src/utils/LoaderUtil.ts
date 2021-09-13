@@ -4,8 +4,8 @@ import fs from 'fs/promises'
 /**
  * This will resolve the nearest files in workspace folder tree
  */
-export async function resolveFilePathInWorkspace(fileName: string): Promise<string | null> {
-    const parsed = path.parse(process.cwd())
+export async function getNearestFilePath(startDirectory: string, fileName: string): Promise<string | null> {
+    const parsed = path.parse(startDirectory)
     const pathClips = [...parsed.dir.replace(parsed.root, '').split(path.sep), parsed.base]
 
     const searchPaths = pathClips
@@ -19,6 +19,9 @@ export async function resolveFilePathInWorkspace(fileName: string): Promise<stri
     return await checkFileOrDirectoryExistence(searchPaths)
 }
 
+/**
+ * Return the first file or director the exist in paths array, if none of them exist, return null
+ */
 export async function checkFileOrDirectoryExistence(paths: string[]): Promise<string | null> {
     for (const path of paths) {
         try {

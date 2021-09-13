@@ -1,8 +1,8 @@
 import { atom } from 'jotai'
-import { resolveFilePathInWorkspace } from '../utils/LoaderUtil'
+import { getNearestFilePath } from '../utils/LoaderUtil'
 
 export const versionInfoAtom = atom(async () => {
-    const packageJsonPath = await resolveFilePathInWorkspace('package.json')
+    const packageJsonPath = await getNearestFilePath(__dirname, 'package.json')
     if (packageJsonPath) {
         try {
             return require(require.resolve(packageJsonPath)).version
