@@ -1,4 +1,3 @@
-import fs from 'fs/promises'
 import Module from 'module'
 import { createContext, Script } from 'vm'
 import { getNearestFilePath, requireTSFile, requireJSFile } from '../utils/LoaderUtil'
