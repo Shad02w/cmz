@@ -82,6 +82,6 @@ and also install `ts-node`, without `ts-node` the config file will not able to t
 
 ## Contributors
 
-<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+<a>
   <img src = "https://contrib.rocks/image?repo=Shad02w/cmz"/>
 </a>
