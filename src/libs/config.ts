@@ -12,7 +12,7 @@ interface ResolveParameter {
 }
 export interface Config {
     commitTypes: NameWithOptionalDescription[]
-    scope?: NameWithOptionalDescription[]
+    scopes?: NameWithOptionalDescription[]
     hasLongMessage?: boolean
     resolve: (result: ResolveParameter) => string
 }

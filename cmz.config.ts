@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from '@shad02w/cmz'
+
+export default defineConfig({
     commitTypes: [
         {
             name: 'Refactor',
@@ -7,6 +9,10 @@ module.exports = {
         {
             name: 'Fix',
             description: 'A bug fix',
+        },
+        {
+            name: 'Feature',
+            description: 'Newly added functionalities',
         },
         {
             name: 'Upgrade',
@@ -18,4 +24,4 @@ module.exports = {
         },
     ],
     resolve: ({ commitType, message }) => `(${commitType.name}) ${message}`,
-}
+})
