@@ -26,6 +26,7 @@
         "@types/react": "^17.0.24",
         "@typescript-eslint/eslint-plugin": "^4.31.2",
         "@typescript-eslint/parser": "^4.31.2",
+        "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.32.0",
         "eslint-plugin-react": "^7.26.0",
         "eslint-plugin-react-hooks": "^4.2.0",
@@ -46,5 +47,10 @@
     "peerDependencies": {
         "typescript": "^4.1.2"
     },
-    "optionalDependencies": {}
+    "optionalDependencies": {},
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
