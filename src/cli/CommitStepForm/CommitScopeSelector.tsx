@@ -1,14 +1,11 @@
 import React from 'react'
-import { Text } from 'ink'
-import { Question } from '../../components/Question'
-import type { ItemProps } from 'ink-select-input/build'
+import { Question } from '@components/Question'
 import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { commitScopeAtom } from '../../atoms/commitFormAtom'
-import { nextStepAtom } from '../../atoms/stepAtom'
-import { NameWithOptionalDescription } from '../../libs/config'
-import { configAtom } from '../../atoms/configAtom'
-import { CustomSelector } from '../../components/CustomSelector'
-import { NullableCustomSelector } from '../../components/CustomSelector/NullableCustomSelector'
+import { commitScopeAtom } from '@atoms/commitFormAtom'
+import { nextStepAtom } from '@atoms/stepAtom'
+import { NameWithOptionalDescription } from '@libs/config'
+import { configAtom } from '@atoms/configAtom'
+import { NullableCustomSelector } from '@components/CustomSelector/NullableCustomSelector'
 
 const commitScopeConfigAtom = selectAtom(configAtom, config => config.scopes)
 

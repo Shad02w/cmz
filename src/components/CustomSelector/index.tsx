@@ -1,10 +1,10 @@
 import React from 'react'
 import { Indicator } from './Indicator'
 import { ItemProps } from 'ink-select-input/build'
-import { NameWithOptionalDescription } from '../../libs/config'
+import { NameWithOptionalDescription } from '@libs/config'
 import { Option } from './Option'
-import type { Item } from 'ink-select-input/build/SelectInput'
 import { SelectListWithHint } from './SelectListWithHint'
+import type { Item } from 'ink-select-input/build/SelectInput'
 
 export interface Props {
     list: NameWithOptionalDescription[]

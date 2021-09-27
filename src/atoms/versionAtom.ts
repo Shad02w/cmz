@@ -1,5 +1,5 @@
 import { atom } from 'jotai'
-import { getNearestFilePath } from '../utils/LoaderUtil'
+import { getNearestFilePath } from '@utils/LoaderUtil'
 
 export const versionInfoAtom = atom<string | null>(async () => {
     const packageJsonPath = await getNearestFilePath(__dirname, 'package.json')

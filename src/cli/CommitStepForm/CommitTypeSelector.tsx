@@ -1,11 +1,11 @@
 import React from 'react'
 import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { Question } from '../../components/Question'
-import { nextStepAtom } from '../../atoms/stepAtom'
-import { commitTypeAtom } from '../../atoms/commitFormAtom'
-import { configAtom } from '../../atoms/configAtom'
-import type { NameWithOptionalDescription } from '../../libs/config'
-import { CustomSelector } from '../../components/CustomSelector'
+import { Question } from '@components/Question'
+import { nextStepAtom } from '@atoms/stepAtom'
+import { commitTypeAtom } from '@atoms/commitFormAtom'
+import { configAtom } from '@atoms/configAtom'
+import type { NameWithOptionalDescription } from '@libs/config'
+import { CustomSelector } from '@components/CustomSelector'
 
 const commitTypesConfigAtom = selectAtom(configAtom, config => config.commitTypes)
 

@@ -2,14 +2,14 @@ import React from 'react'
 import { Box, Newline, Text, useInput } from 'ink'
 import { useAtom } from 'jotai'
 import { useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { lastStepAtom, stepStateAtom } from '../../atoms/stepAtom'
-import { configAtom } from '../../atoms/configAtom'
-import { Steps as UISteps } from '../../components/Steps'
+import { lastStepAtom, stepStateAtom } from '@atoms/stepAtom'
+import { configAtom } from '@atoms/configAtom'
+import { Steps as UISteps } from '@components/Steps'
 import { CommitTypeQuestion, CommitTypeSelector } from './CommitTypeSelector'
 import { CommitScopeQuestion, CommitScopeSelector } from './CommitScopeSelector'
 import { MessageInput, MessageInputQuestion } from './MessageInput'
 import { ResolvePreviewConfirm, ResolvePreviewQuestion } from './ResolvePreview'
-import type { StepItem } from '../../components/Steps'
+import type { StepItem } from '@components/Steps'
 
 export const CommitStepForm = React.memo(() => {
     const config = useAtomValue(configAtom)

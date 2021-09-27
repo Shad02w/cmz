@@ -3,9 +3,9 @@ import { Text, useInput } from 'ink'
 import { atom } from 'jotai'
 import { useAtomValue } from 'jotai/utils'
 import React from 'react'
-import { commitMessageAtom, commitScopeAtom, commitTypeAtom } from '../../atoms/commitFormAtom'
-import { configAtom } from '../../atoms/configAtom'
-import { commit } from '../../libs/commit'
+import { commitMessageAtom, commitScopeAtom, commitTypeAtom } from '@atoms/commitFormAtom'
+import { configAtom } from '@atoms/configAtom'
+import { commit } from '@libs/commit'
 
 const resolvedCommitMessageAtom = atom(get =>
     get(configAtom).resolve({

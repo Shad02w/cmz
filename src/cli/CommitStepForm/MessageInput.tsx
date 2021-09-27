@@ -5,7 +5,7 @@ import { Input } from '../../components/Input'
 import { commitMessageAtom } from '../../atoms/commitFormAtom'
 import { useAtom } from 'jotai'
 import { useAtomValue, useUpdateAtom } from 'jotai/utils'
-import { nextStepAtom } from '../../atoms/stepAtom'
+import { nextStepAtom } from '@atoms/stepAtom'
 
 export const MessageInput = React.memo(() => {
     const [message, setMessage] = useAtom(commitMessageAtom)

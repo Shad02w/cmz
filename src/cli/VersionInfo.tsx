@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'ink'
 import { useAtomValue } from 'jotai/utils'
-import { versionInfoAtom } from '../atoms/versionAtom'
+import { versionInfoAtom } from '@atoms/versionAtom'
 
 export const VersionInfo = React.memo(() => {
     const versionInfo = useAtomValue(versionInfoAtom)

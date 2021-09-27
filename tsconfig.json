@@ -19,7 +19,14 @@
         "newLine": "lf",
         "types": ["node"],
         "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@atoms/*": ["atoms/*"],
+            "@components/*": ["components/*"],
+            "@utils/*": ["utils/*"],
+            "@libs/*": ["libs/*"]
+        }
     },
     "include": ["src"]
 }

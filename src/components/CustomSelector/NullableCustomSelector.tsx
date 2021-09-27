@@ -1,5 +1,5 @@
 import React from 'react'
-import { NameWithOptionalDescription } from '../../libs/config'
+import { NameWithOptionalDescription } from '@libs/config'
 import { CustomSelector } from './index'
 
 interface Props {

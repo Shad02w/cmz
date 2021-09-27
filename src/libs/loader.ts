@@ -1,6 +1,6 @@
 import Module from 'module'
 import { createContext, Script } from 'vm'
-import { getNearestFilePath, requireTSFile, requireJSFile } from '../utils/LoaderUtil'
+import { getNearestFilePath, requireTSFile, requireJSFile } from '@utils/LoaderUtil'
 import path from 'path'
 import type { Config } from './config'
 
