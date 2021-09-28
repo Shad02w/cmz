@@ -11,19 +11,5 @@
         "@babel/preset-typescript",
         "@babel/preset-react"
     ],
-    "plugins": [
-        "tsconfig-paths-module-resolver"
-        // [
-        //     "module-resolver",
-        //     {
-        //         "root": ["./src"],
-        //         "alias": {
-        //             "@atoms": "./src/app/atoms",
-        //             "@components": "./src/app/components",
-        //             "@utils": "./src/utils",
-        //             "@libs": "./src/libs"
-        //         }
-        //     }
-        // ]
-    ]
+    "plugins": ["tsconfig-paths-module-resolver"]
 }

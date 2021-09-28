@@ -14,7 +14,7 @@
     "author": "Alvis Tse <alvistse123@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "ts-node-dev --respawn src/bin.tsx",
+        "start": "ts-node-dev --require tsconfig-paths/register --respawn src/bin.tsx",
         "build": "ts-node scripts/build.ts",
         "commit": "cmz"
     },
@@ -40,6 +40,7 @@
         "prettier": "^2.4.1",
         "ts-node": "^10.2.1",
         "ts-node-dev": "^1.1.8",
+        "tsconfig-paths": "^3.11.0",
         "typescript": "^4.4.3"
     },
     "dependencies": {
