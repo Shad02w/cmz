@@ -22,8 +22,8 @@
         "skipLibCheck": true,
         "baseUrl": "./src",
         "paths": {
-            "@atoms/*": ["atoms/*"],
-            "@components/*": ["components/*"],
+            "@atoms/*": ["app/atoms/*"],
+            "@components/*": ["app/components/*"],
             "@utils/*": ["utils/*"],
             "@libs/*": ["libs/*"]
         }

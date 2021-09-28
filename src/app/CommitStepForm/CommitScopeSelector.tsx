@@ -1,6 +1,6 @@
 import React from 'react'
-import { Question } from '@components/Question'
 import { selectAtom, useAtomValue, useUpdateAtom } from 'jotai/utils'
+import { Question } from '@components/Question'
 import { commitScopeAtom } from '@atoms/commitFormAtom'
 import { nextStepAtom } from '@atoms/stepAtom'
 import { NameWithOptionalDescription } from '@libs/config'

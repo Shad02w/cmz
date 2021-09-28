@@ -12,17 +12,18 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        [
-            "module-resolver",
-            {
-                "root": ["./src"],
-                "alias": {
-                    "@atoms": "./src/atoms",
-                    "@components": "./src/components",
-                    "@utils": "./src/utils",
-                    "@libs": "./src/libs"
-                }
-            }
-        ]
+        "tsconfig-paths-module-resolver"
+        // [
+        //     "module-resolver",
+        //     {
+        //         "root": ["./src"],
+        //         "alias": {
+        //             "@atoms": "./src/app/atoms",
+        //             "@components": "./src/app/components",
+        //             "@utils": "./src/utils",
+        //             "@libs": "./src/libs"
+        //         }
+        //     }
+        // ]
     ]
 }
