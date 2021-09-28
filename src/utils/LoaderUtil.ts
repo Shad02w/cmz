@@ -1,11 +1,12 @@
 import path from 'path'
 import fs from 'fs/promises'
 import ts from 'typescript'
+import { PathUtil } from './PathUtil'
 
 /**
  * This will resolve the nearest files in workspace folder tree
  */
-export async function getNearestFilePath(startDirectory: string, fileNames: string | string[]): Promise<string | null> {
+async function getNearestFilePath(startDirectory: string, fileNames: string | string[]): Promise<string | null> {
     const parsed = path.parse(startDirectory)
     const pathClips = [...parsed.dir.replace(parsed.root, '').split(path.sep), parsed.base]
     const files = typeof fileNames === 'string' ? [fileNames] : fileNames
@@ -25,9 +26,9 @@ export async function getNearestFilePath(startDirectory: string, fileNames: stri
 /**
  * Return the first file or director the exist in paths array, if none of them exist, return null
  */
-export async function getFirstExistFileOrDirectory(filePaths: string[]): Promise<string | null> {
+async function getFirstExistFileOrDirectory(filePaths: string[]): Promise<string | null> {
     for (const filePath of filePaths) {
-        const exist = await checkFileOrDirectoryExistence(filePath)
+        const exist = await PathUtil.checkFileOrDirectoryExistence(filePath)
         if (exist) {
             return filePath
         }
@@ -35,20 +36,11 @@ export async function getFirstExistFileOrDirectory(filePaths: string[]): Promise
     return null
 }
 
-export async function checkFileOrDirectoryExistence(filePath: string): Promise<boolean> {
-    try {
-        await fs.access(filePath)
-        return true
-    } catch (e) {
-        return false
-    }
-}
-
 export async function requireJSFile(filePath: string): Promise<any> {
     return require(filePath)
 }
 
-export async function transpileTsFile(filePath: string): Promise<string> {
+async function transpileTsFile(filePath: string): Promise<string> {
     const buffer = await fs.readFile(path.resolve(filePath), { encoding: 'utf-8' })
     return ts.transpile(buffer, {
         target: ts.ScriptTarget.ES2016,
@@ -60,10 +52,17 @@ export async function transpileTsFile(filePath: string): Promise<string> {
     })
 }
 
-export async function requireTSFile(filePath: string) {
+async function requireTSFile(filePath: string) {
     return `require('ts-node').register({
         transpileOnly: true,
     })
     
     ${await transpileTsFile(filePath)}`
 }
+
+export const LoaderUtil = Object.freeze({
+    getFirstExistFileOrDirectory,
+    getNearestFilePath,
+    requireTSFile,
+    requireJSFile,
+})

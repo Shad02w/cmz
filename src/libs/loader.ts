@@ -1,15 +1,9 @@
 import Module from 'module'
 import { createContext, Script } from 'vm'
-import { getNearestFilePath, requireTSFile, requireJSFile, checkFileOrDirectoryExistence } from '@utils/LoaderUtil'
+import { LoaderUtil } from '@utils/LoaderUtil'
 import path from 'path'
 import type { Config } from './config'
-
-const LoaderUtil = {
-    getNearestFilePath,
-    requireTSFile,
-    requireJSFile,
-    checkFileOrDirectoryExistence,
-}
+import { PathUtil } from '@utils/PathUtil'
 
 /**
  * This is the loader for config file
@@ -65,9 +59,12 @@ export async function resolveConfig(filePath?: string): Promise<Config> {
     let actualConfigFilePath: string | null = null
     if (filePath) {
         actualConfigFilePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath)
-        const fileExist = await LoaderUtil.checkFileOrDirectoryExistence(actualConfigFilePath)
+        const fileExist = await PathUtil.checkFileOrDirectoryExistence(actualConfigFilePath)
         if (!fileExist) {
             throw new Error(`Unable to find config file: ${actualConfigFilePath}`)
+        }
+        if (!PathUtil.isInsideWorkspace(actualConfigFilePath)) {
+            throw new Error(`Could not refer config file outside current workspace`)
         }
     } else {
         const resolvedFilePath = await LoaderUtil.getNearestFilePath(process.cwd(), [
