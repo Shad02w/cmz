@@ -19,22 +19,29 @@ export async function getNearestFilePath(startDirectory: string, fileNames: stri
         .flatMap(_ => _)
         .filter(_ => path.isAbsolute(_))
 
-    return await checkFileOrDirectoryExistence(searchPaths)
+    return await getFirstExistFileOrDirectory(searchPaths)
 }
 
 /**
  * Return the first file or director the exist in paths array, if none of them exist, return null
  */
-export async function checkFileOrDirectoryExistence(paths: string[]): Promise<string | null> {
-    for (const path of paths) {
-        try {
-            await fs.access(path)
-            return path
-        } catch (e) {
-            // do nothing
+export async function getFirstExistFileOrDirectory(filePaths: string[]): Promise<string | null> {
+    for (const filePath of filePaths) {
+        const exist = await checkFileOrDirectoryExistence(filePath)
+        if (exist) {
+            return filePath
         }
     }
     return null
+}
+
+export async function checkFileOrDirectoryExistence(filePath: string): Promise<boolean> {
+    try {
+        await fs.access(filePath)
+        return true
+    } catch (e) {
+        return false
+    }
 }
 
 export async function requireJSFile(filePath: string): Promise<any> {

@@ -1,6 +1,9 @@
 import { atom } from 'jotai'
-import { loadConfig } from '@libs/loader'
+import { resolveConfig } from '@libs/loader'
 
-export const configAtom = atom(async () => {
-    return await loadConfig()
+export const initConfigPathAtom = atom<string | undefined>(undefined)
+
+export const configAtom = atom(async get => {
+    const initConfigPath = get(initConfigPathAtom)
+    return await resolveConfig(initConfigPath)
 })

@@ -6,11 +6,17 @@ import { Header } from './Header'
 import { ErrorText } from './ErrorText'
 import { ErrorBoundary } from '@components/ErrorBoundary'
 import { Loading } from './Loading'
+import { initConfigPathAtom } from '@atoms/configAtom'
 
-export const CLI: React.FC = () => {
+interface Props {
+    configPath?: string
+}
+
+export const CLI: React.FC<Props> = React.memo((props: Props) => {
+    const { configPath } = props
     return (
         <ErrorBoundary errorRender={ErrorText}>
-            <Provider>
+            <Provider initialValues={[[initConfigPathAtom, configPath]]}>
                 <Box flexDirection="column">
                     <Header />
                     <Newline />
@@ -21,4 +27,4 @@ export const CLI: React.FC = () => {
             </Provider>
         </ErrorBoundary>
     )
-}
+})

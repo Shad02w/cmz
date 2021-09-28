@@ -18,6 +18,12 @@
         "build": "ts-node scripts/build.ts",
         "commit": "cmz"
     },
+    "files": [
+        "app",
+        "libs",
+        "utils",
+        "cli"
+    ],
     "engines": {
         "node": ">=12"
     },
@@ -57,5 +63,8 @@
     "peerDependencies": {
         "ts-node": "*",
         "typescript": ">=4.0.0"
+    },
+    "oclif": {
+        "bin": "cmz"
     }
 }

@@ -1,6 +1,6 @@
 import Module from 'module'
 import { createContext, Script } from 'vm'
-import { getNearestFilePath, requireTSFile, requireJSFile } from '@utils/LoaderUtil'
+import { getNearestFilePath, requireTSFile, requireJSFile, checkFileOrDirectoryExistence } from '@utils/LoaderUtil'
 import path from 'path'
 import type { Config } from './config'
 
@@ -8,6 +8,7 @@ const LoaderUtil = {
     getNearestFilePath,
     requireTSFile,
     requireJSFile,
+    checkFileOrDirectoryExistence,
 }
 
 /**
@@ -48,22 +49,35 @@ async function loadTSConfig(filePath: string): Promise<Config> {
     return mo.exports.default as Config
 }
 
-export async function loadConfig(): Promise<Config> {
-    const filePath = await LoaderUtil.getNearestFilePath(process.cwd(), [
-        `${CONFIG_FILE_NAME}.ts`,
-        `${CONFIG_FILE_NAME}.js`,
-    ])
-
-    if (!filePath) {
-        throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
+async function loadConfig(filePath: string): Promise<Config> {
+    const fileType = getConfigFileType(filePath)
+    if (fileType === 'JS') {
+        return loadJSConfig(filePath)
+    } else if (fileType === 'TS') {
+        return loadTSConfig(filePath)
     } else {
-        const fileType = getConfigFileType(filePath)
-        if (fileType === 'JS') {
-            return loadJSConfig(filePath)
-        } else if (fileType === 'TS') {
-            return loadTSConfig(filePath)
-        } else {
-            throw new Error('Config file should be json, js and ts file')
-        }
+        throw new Error('Config file should be .js and .ts file')
     }
+}
+
+// resolve config will search and resolve file path of the config file and call loadConfig() to get the config object
+export async function resolveConfig(filePath?: string): Promise<Config> {
+    let actualConfigFilePath: string | null = null
+    if (filePath) {
+        actualConfigFilePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath)
+        const fileExist = await LoaderUtil.checkFileOrDirectoryExistence(actualConfigFilePath)
+        if (!fileExist) {
+            throw new Error(`Unable to find config file: ${actualConfigFilePath}`)
+        }
+    } else {
+        const resolvedFilePath = await LoaderUtil.getNearestFilePath(process.cwd(), [
+            `${CONFIG_FILE_NAME}.ts`,
+            `${CONFIG_FILE_NAME}.js`,
+        ])
+        if (!resolvedFilePath) {
+            throw new Error(`Unable to find config file. Please Add ${CONFIG_FILE_NAME} file to the workspace`)
+        }
+        actualConfigFilePath = resolvedFilePath
+    }
+    return await loadConfig(actualConfigFilePath)
 }
