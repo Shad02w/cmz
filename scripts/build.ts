@@ -11,8 +11,12 @@ const filePaths = {
     tsconfig: path.resolve(__dirname, '../tsconfig.json'),
 }
 
+function logTitle(description: string) {
+    console.log('\x1b[32m%s\x1b[0m%s', figures.circleFilled, ` ${description}`)
+}
+
 function runCommand(description: string, command: string, args: string[] = []) {
-    console.log('\x1b[32m%s\x1b[0m%s', figures.tick, ` ${description}`)
+    logTitle(description)
 
     const result = spawnSync(command, args, {
         shell: true,
@@ -23,11 +27,24 @@ function runCommand(description: string, command: string, args: string[] = []) {
         console.error(result.error)
         process.exit(1)
     }
-
-    console.log('\n')
 }
 
-async function cleanDistFolder() {
+function runAsync(description: string, process: () => Promise<void> | void): () => Promise<void> {
+    return async () => {
+        logTitle(description)
+        await process()
+    }
+}
+
+async function generateDeclarationFiles() {
+    runCommand('Generate Declaration File', 'ttsc', ['-P', filePaths.tsconfig])
+}
+
+async function transpileSourceCode() {
+    runCommand('Transpile Source Code', 'babel', ['./src', '-d', 'dist/lib', '--extensions .ts,.tsx'])
+}
+
+const cleanDistFolder = runAsync('Clean up build folder', async () => {
     const distDirectoryPath = path.resolve(__dirname, '../dist')
     let isExisted = false
     try {
@@ -40,17 +57,9 @@ async function cleanDistFolder() {
         await fs.rm(distDirectoryPath, { recursive: true, force: true })
     }
     await fs.mkdir(distDirectoryPath)
-}
+})
 
-async function generateDeclarationFiles() {
-    runCommand('Generate Declaration File', 'ttsc', ['-P', filePaths.tsconfig])
-}
-
-async function transpileSourceCode() {
-    runCommand('Transpile Source Code', 'babel', ['./src', '-d', 'dist/lib', '--extensions .ts,.tsx'])
-}
-
-async function copyProjectFiles() {
+const copyProjectFiles = runAsync('Copy project file', async () => {
     try {
         await fs.copyFile(filePaths.rootPackageJson, filePaths.distPackageJson)
         await fs.copyFile(filePaths.rootReadme, filePaths.distReadme)
@@ -58,7 +67,7 @@ async function copyProjectFiles() {
         console.error(error)
         process.exit(1)
     }
-}
+})
 
 async function run() {
     await cleanDistFolder()
