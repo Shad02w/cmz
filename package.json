@@ -7,9 +7,9 @@
         "cli",
         "cmz"
     ],
-    "main": "./src/index.js",
+    "main": "./lib/index.js",
     "bin": {
-        "cmz": "./src/bin.js"
+        "cmz": "./lib/bin.js"
     },
     "repository": "https://github.com/Shad02w/cmz.git",
     "author": "Alvis Tse <alvistse123@gmail.com>",
@@ -20,7 +20,7 @@
         "commit": "cmz"
     },
     "files": [
-        "src"
+        "lib"
     ],
     "engines": {
         "node": ">=12"
