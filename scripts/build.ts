@@ -43,7 +43,7 @@ async function cleanDistFolder() {
 }
 
 async function generateDeclarationFiles() {
-    runCommand('Generate Declaration File', 'tsc', ['-P', filePaths.tsconfig])
+    runCommand('Generate Declaration File', 'ttsc', ['-P', filePaths.tsconfig])
 }
 
 async function transpileSourceCode() {
