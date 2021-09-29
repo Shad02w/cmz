@@ -59,7 +59,7 @@ const cleanDistFolder = runAsync('Clean up build folder', async () => {
     await fs.mkdir(distDirectoryPath)
 })
 
-const copyProjectFiles = runAsync('Copy project file', async () => {
+const copyProjectFiles = runAsync('Copy project files', async () => {
     try {
         await fs.copyFile(filePaths.rootPackageJson, filePaths.distPackageJson)
         await fs.copyFile(filePaths.rootReadme, filePaths.distReadme)

@@ -1305,10 +1305,10 @@
     widest-line "^3.1.0"
     wrap-ansi "^4.0.0"
 
-"@shad02w/cmz@^1.0.8-beta.1":
-  version "1.0.8-beta.1"
-  resolved "https://registry.yarnpkg.com/@shad02w/cmz/-/cmz-1.0.8-beta.1.tgz#aaf4981997a00fa918820a1cad957a904c13a9c7"
-  integrity sha512-kjPPQlW9IswrZh9Kt7izMcAILq2I4xs7ZBdtHM4+mEGN61Evh1dCCpRA90ox+AQ9NEvaoVgioheUWcRl2LPsiA==
+"@shad02w/cmz@^1.0.8-beta.2":
+  version "1.0.8-beta.2"
+  resolved "https://registry.yarnpkg.com/@shad02w/cmz/-/cmz-1.0.8-beta.2.tgz#596ab732b3f34f76dbcd18cb377989ce4ec86168"
+  integrity sha512-DVIke5CS85KOumd76qSxXZz/zt0zwIjCZbhAFCfiXBR0TDbt5mv8fYpIiBE7zANldzsWHP+f7maE8moHJZ0lxA==
   dependencies:
     "@oclif/command" "^1.8.0"
     "@oclif/config" "^1.17.0"
