@@ -10,7 +10,7 @@
         "strict": true,
         "declaration": true,
         "outDir": "dist",
-        "rootDir": "src",
+        "rootDir": "./",
         "emitDeclarationOnly": true,
         "sourceMap": false,
         "moduleResolution": "Node",

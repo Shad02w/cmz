@@ -47,7 +47,7 @@ async function generateDeclarationFiles() {
 }
 
 async function transpileSourceCode() {
-    runCommand('Transpile Source Code', 'babel', ['src', '--out-dir', 'dist', '--extensions .ts,.tsx'])
+    runCommand('Transpile Source Code', 'babel', ['./src', '-d', 'dist/src', '--extensions .ts,.tsx'])
 }
 
 async function copyProjectFiles() {
