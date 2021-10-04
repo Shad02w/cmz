@@ -8,7 +8,7 @@ export const Loading = (props: Props) => {
     return (
         <Text>
             <Text color="green">
-                <Spinner type="moon" />
+                <Spinner type="dots6" />
             </Text>
             {' Loading config...'}
         </Text>
