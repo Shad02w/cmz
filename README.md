@@ -22,7 +22,9 @@ yarn add -D @shad02w/cmz
 yarn cmz
 ```
 
-## Config
+
+
+## Configurations
 
 Add `cmz.config.js` to the root of workspace and repo, add setup as following:
 
@@ -78,6 +80,31 @@ export default defineConfig({
 ```
 
 and also install `ts-node`, without `ts-node` the config file will not able to transpile.
+
+If you do not want to put config file on root of the workspace or want a alternative config file name, you can use 
+
+```shell
+cmz -c "your config file path here"
+```
+
+to specify a config file.
+
+## Options 
+
+```shell
+# cmz -h
+A simple git commit tool
+
+USAGE
+  $ cmz
+
+OPTIONS
+  -c, --config=config  custom config file path
+  -h, --help           show CLI help
+  -v, --version        show CLI version
+```
+
+
 
 ## Contributors
 
