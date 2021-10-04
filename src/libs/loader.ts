@@ -39,7 +39,7 @@ async function loadTSConfig(filePath: string): Promise<Config> {
     }
 
     const context = createContext(sandBox)
-    script.runInContext(context, { timeout: 1000 })
+    script.runInContext(context, { timeout: 5000 })
     return mo.exports.default as Config
 }
 
