@@ -7,7 +7,7 @@ import { configAtom } from '@atoms/configAtom'
 import type { NameWithOptionalDescription } from '@libs/config'
 import { CustomSelector } from '@components/CustomSelector'
 
-const commitTypesConfigAtom = selectAtom(configAtom, config => config.commitTypes)
+const commitTypesConfigAtom = selectAtom(configAtom, async config => (await config).commitTypes)
 
 export const CommitTypeSelector: React.FC = React.memo(() => {
     const commitTypes = useAtomValue(commitTypesConfigAtom)

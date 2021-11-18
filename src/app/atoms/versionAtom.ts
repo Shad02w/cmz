@@ -1,7 +1,7 @@
 import { atom } from 'jotai'
 import { LoaderUtil } from '@utils/LoaderUtil'
 
-export const versionInfoAtom = atom<string | null>(async () => {
+export const versionInfoAtom = atom<Promise<string | null>>(async () => {
     const packageJsonPath = await LoaderUtil.getNearestFilePath(__dirname, 'package.json')
     if (packageJsonPath) {
         try {

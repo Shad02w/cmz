@@ -26,13 +26,7 @@
             "@components/*": ["app/components/*"],
             "@utils/*": ["utils/*"],
             "@libs/*": ["libs/*"]
-        },
-        "plugins": [
-            {
-                "transform": "@zerollup/ts-transform-paths",
-                "exclude": ["*"]
-            }
-        ]
+        }
     },
     "include": ["src"]
 }

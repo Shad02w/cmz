@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { spawnSync } from 'child_process'
+import { spawn, spawnSync } from 'child_process'
 import figures from 'figures'
 
 const filePaths = {
@@ -15,18 +15,24 @@ function logTitle(description: string) {
     console.log('\x1b[32m%s\x1b[0m%s', figures.circleFilled, ` ${description}`)
 }
 
-function runCommand(description: string, command: string, args: string[] = []) {
-    logTitle(description)
+async function runCommand(description: string, command: string, args: string[] = []) {
+    return new Promise<void>((resolve, reject) => {
+        logTitle(description)
+        const child = spawn(command, args, {
+            shell: true,
+            stdio: 'inherit',
+        })
+        child.on('error', e => {
+            reject(e)
+        })
 
-    const result = spawnSync(command, args, {
-        shell: true,
-        stdio: 'inherit',
+        child.on('exit', code => {
+            resolve()
+            if (code !== 0) {
+                process.exit(1)
+            }
+        })
     })
-
-    if (result.error) {
-        console.error(result.error)
-        process.exit(1)
-    }
 }
 
 function runAsync(description: string, process: () => Promise<void> | void): () => Promise<void> {
@@ -37,11 +43,11 @@ function runAsync(description: string, process: () => Promise<void> | void): () 
 }
 
 async function generateDeclarationFiles() {
-    runCommand('Generate Declaration File', 'ttsc', ['-P', filePaths.tsconfig])
+    return runCommand('Generate Declaration File', 'ttsc', ['-P', filePaths.tsconfig])
 }
 
 async function transpileSourceCode() {
-    runCommand('Transpile Source Code', 'babel', ['./src', '-d', 'dist/lib', '--extensions .ts,.tsx'])
+    return runCommand('Transpile Source Code', 'babel', ['./src', '-d', 'dist/lib', '--extensions .ts,.tsx'])
 }
 
 const cleanDistFolder = runAsync('Clean up build folder', async () => {
@@ -70,10 +76,15 @@ const copyProjectFiles = runAsync('Copy project files', async () => {
 })
 
 async function run() {
-    await cleanDistFolder()
-    await generateDeclarationFiles()
-    await transpileSourceCode()
-    await copyProjectFiles()
+    try {
+        await cleanDistFolder()
+        await generateDeclarationFiles()
+        await transpileSourceCode()
+        await copyProjectFiles()
+    } catch (e) {
+        console.error(e)
+        process.exit(1)
+    }
 }
 
 run()
